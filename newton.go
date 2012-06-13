@@ -5,29 +5,29 @@ import (
   "math"
 )
 
-var tests = []float64{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0}
-const Threshold = 0.01
+const Precision = 1e-15
 
-func Newton(z, x float64) float64 {
-  return z - ((math.Pow(z, 2) - x) / (2 * z))
+func Newton(guess, input float64) float64 {
+  return guess - (guess*guess-input)/(2*guess)
 }
 
 func Sqrt(input float64) float64 {
-  for _, value := range tests {
-    result := Newton(value, input)
+  var guess, delta float64 = input, 1
 
-    if delta := math.Abs(value - result); delta <= Threshold {
-      return value
-    } else {
-      // fmt.Println(value, delta)
-    }
+  for delta > Precision {
+    // fmt.Println(guess, delta)
+    old_guess := guess
+
+    guess = Newton(guess, input)
+    delta = math.Abs(guess - old_guess)
   }
 
-  return 0.0
+  return guess
 }
 
 func main() {
-  fmt.Println(16, Sqrt(16))
-  fmt.Println(25, Sqrt(25))
-  fmt.Println(81, Sqrt(81))
+    fmt.Println(9, Sqrt(9))
+    fmt.Println(25, Sqrt(25))
+    fmt.Println(100, Sqrt(100))
+    fmt.Println(52, Sqrt(52))
 }
