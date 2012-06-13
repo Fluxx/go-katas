@@ -1,1 +1,4 @@
-Code tests and code katas with the Go langauge
+go-katas
+========
+
+Go language katas and programming exercises
