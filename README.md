@@ -1,1 +1,1 @@
-Code katas with the Go langauge
+Code tests and code katas with the Go langauge
